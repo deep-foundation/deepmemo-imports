@@ -24,9 +24,9 @@ interface InstallerProviderProps {
 
 interface InstallerContextData {
   'isAdmin'?: boolean;
-  '@deep-foundation/chatgpt-azure'?: LinkPlain<Id>[];
-  '@deep-foundation/chatgpt-azure-deep'?: LinkPlain<Id>[];
-  '@deep-foundation/chatgpt-azure-templates'?: LinkPlain<Id>[];
+  '@deep-foundation/ai'?: LinkPlain<Id>[];
+  '@deep-foundation/ai-models'?: LinkPlain<Id>[];
+  '@deep-foundation/ai-templates'?: LinkPlain<Id>[];
   '@deep-foundation/voice-to-sync-text-file'?: LinkPlain<Id>[];
   '@deep-foundation/deepmemo-links'?: LinkPlain<Id>[];
   '@deep-foundation/telegram-bot'?: LinkPlain<Id>[];
@@ -66,9 +66,9 @@ export function useInstaller() {
 }
 
 const fields = [
-  '@deep-foundation/chatgpt-azure',
-  '@deep-foundation/chatgpt-azure-deep',
-  '@deep-foundation/chatgpt-azure-templates',
+  '@deep-foundation/ai',
+  '@deep-foundation/ai-models',
+  '@deep-foundation/ai-templates',
   '@deep-foundation/voice-to-sync-text-file',
   '@deep-foundation/deepmemo-links',
   '@deep-foundation/telegram-bot',
@@ -127,9 +127,9 @@ export function InstallerProviderCore({
   const value: InstallerContextData = {
     installing: installing,
     'isAdmin': isAdmin,
-    '@deep-foundation/chatgpt-azure': deep.useMinilinksSubscription(find('@deep-foundation/chatgpt-azure')).map(l => l.toPlain()),
-    '@deep-foundation/chatgpt-azure-deep': deep.useMinilinksSubscription(find('@deep-foundation/chatgpt-azure-deep')).map(l => l.toPlain()),
-    '@deep-foundation/chatgpt-azure-templates': deep.useMinilinksSubscription(find('@deep-foundation/chatgpt-azure-templates')).map(l => l.toPlain()),
+    '@deep-foundation/ai': deep.useMinilinksSubscription(find('@deep-foundation/ai')).map(l => l.toPlain()),
+    '@deep-foundation/ai-models': deep.useMinilinksSubscription(find('@deep-foundation/ai-models')).map(l => l.toPlain()),
+    '@deep-foundation/ai-templates': deep.useMinilinksSubscription(find('@deep-foundation/ai-templates')).map(l => l.toPlain()),
     '@deep-foundation/voice-to-sync-text-file': deep.useMinilinksSubscription(find('@deep-foundation/voice-to-sync-text-file')).map(l => l.toPlain()),
     '@deep-foundation/deepmemo-links': deep.useMinilinksSubscription(find('@deep-foundation/deepmemo-links')).map(l => l.toPlain()),
     '@deep-foundation/telegram-bot': deep.useMinilinksSubscription(find('@deep-foundation/telegram-bot')).map(l => l.toPlain()),
@@ -198,9 +198,9 @@ export function InstallerProviderCore({
         const { data: [chatgptAzureInstall] } = await deep.select({ to_id: chatgptAzure?.id, type_id: Install });
         await deep.await(chatgptAzureInstall?.id);
       };
-      await installPackage('@deep-foundation/chatgpt-azure');
-      await installPackage('@deep-foundation/chatgpt-azure-deep');
-      await installPackage('@deep-foundation/chatgpt-azure-templates');
+      await installPackage('@deep-foundation/ai');
+      await installPackage('@deep-foundation/ai-models');
+      await installPackage('@deep-foundation/ai-templates');
       await installPackage('@deep-foundation/voice-to-sync-text-file');
       await installPackage('@deep-foundation/telegram-bot');
       await installPackage('@deep-foundation/deepmemorybot');
@@ -267,14 +267,14 @@ export function InstallerProviderCore({
         in: { data: [
           {
             type_id: UsesApiKey,
-            from_id: value['@deep-foundation/chatgpt-azure-templates'][0].id,
+            from_id: value['@deep-foundation/ai-templates'][0].id,
             in: { data: [
               { type_id: deep.idLocal('@deep-foundation/core', 'Contain'), from_id: space?.id },
             ] },
           },
           {
             type_id: UsesApiKey,
-            from_id: value['@deep-foundation/chatgpt-azure'][0].id,
+            from_id: value['@deep-foundation/ai'][0].id,
             in: { data: [
               { type_id: deep.idLocal('@deep-foundation/core', 'Contain'), from_id: space?.id },
             ] },
@@ -335,7 +335,7 @@ export function InstallerProviderCore({
     ] });
     await deep.insert({
       type_id: UsesModel,
-      from_id: value['@deep-foundation/chatgpt-azure-templates'][0].id,
+      from_id: value['@deep-foundation/ai-templates'][0].id,
       to_id: id,
       in: { data: [
         { type_id: deep.idLocal('@deep-foundation/core', 'Contain'), from_id: deep?.linkId },
